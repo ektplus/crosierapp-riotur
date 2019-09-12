@@ -25,7 +25,7 @@ VALUES ('2f1b0348-089c-4df6-bfe5-694bf3d477ed','Dashboard - crosierapp-riotur', 
 
 -- Entrada de menu para o MainMenu do Crosier com apontamento para o Dashboard deste CrosierApp (É EXIBIDO NO MENU DO CROSIER-CORE)
 INSERT INTO cfg_entmenu(uuid,label,icon,tipo,program_uuid,pai_uuid,ordem,css_style,inserted,updated,estabelecimento_id,user_inserted_id,user_updated_id)
-VALUES ('fbb0522d-6983-48a6-9001-38029ed1b881','Riotur','fas fa-columns','CROSIERCORE_APPENT','2f1b0348-089c-4df6-bfe5-694bf3d477ed',null,0,null,now(),now(),1,1,1);
+VALUES ('fbb0522d-6983-48a6-9001-38029ed1b881','Riotur','fas fa-bus','CROSIERCORE_APPENT','2f1b0348-089c-4df6-bfe5-694bf3d477ed',null,0,null,now(),now(),1,1,1);
 
 -- Entrada de menu raíz para este CrosierApp (NÃO É EXIBIDO)
 INSERT INTO cfg_entmenu(uuid,label,icon,tipo,program_uuid,pai_uuid,ordem,css_style,inserted,updated,estabelecimento_id,user_inserted_id,user_updated_id)
