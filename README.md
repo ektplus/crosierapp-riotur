@@ -1,2 +1,2 @@
-# crosierapp-riotur
-Projeto Riotur
+# crosierapp-helloworld
+Projeto de exemplo para um CrosierApp
