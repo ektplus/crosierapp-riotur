@@ -1,22 +1,20 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Turismo;
 
-use App\Entity\Coisa;
+use App\Entity\Turismo\Veiculo;
 use CrosierSource\CrosierLibBaseBundle\Repository\FilterRepository;
 
 /**
- * Repository para a entidade Coisa.
  *
  * @author Carlos Eduardo Pauluk
- *
  */
-class CoisaRepository extends FilterRepository
+class VeiculoRepository extends FilterRepository
 {
 
     public function getEntityClass(): string
     {
-        return Coisa::class;
+        return Veiculo::class;
     }
 
 

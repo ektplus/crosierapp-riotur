@@ -1,50 +1,39 @@
 'use strict';
 
-let listId = "#coisaList";
+let listId = "#veiculoList";
 
-import DatatablesJs from './crosier/DatatablesJs';
+import DatatablesJs from '../crosier/DatatablesJs';
 
-import routes from '../static/fos_js_routes.json';
-import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+import routes from '../../static/fos_js_routes.json';
+import Routing from '../../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 
 import Moment from 'moment';
+
+import $ from "jquery";
 
 Routing.setRoutingData(routes)
 
 function getDatatablesColumns() {
     return [
         {
-            name: 'e.ordem',
-            data: 'e.ordem',
-            title: 'Ordem'
+            name: 'e.prefixo',
+            data: 'e.prefixo',
+            title: 'Prefixo'
         },
         {
-            name: 'e.nome',
-            data: 'e.nome',
-            title: 'Nome'
+            name: 'e.apelido',
+            data: 'e.apelido',
+            title: 'Apelido'
         },
         {
-            name: 'e.obs',
-            data: 'e.obs',
-            title: 'Obs'
+            name: 'e.placa',
+            data: 'e.placa',
+            title: 'Placa'
         },
         {
-            name: 'e.dtCoisa',
-            data: 'e.dtCoisa',
-            title: 'Data',
-            render: function (data, type, row) {
-                return Moment.unix(data.timestamp).format('DD/MM/YYYY');
-            },
-            className: 'text-center'
-        },
-        {
-            name: 'e.importante',
-            data: 'e.importante',
-            title: 'Importante',
-            render: function (data, type, row) {
-                return data ? 'Sim' : 'Não';
-            },
-            className: 'text-center'
+            name: 'e.status',
+            data: 'e.status',
+            title: 'Status'
         },
         {
             name: 'e.id',
@@ -61,6 +50,7 @@ function getDatatablesColumns() {
                     let csrfTokenDelete = $(listId).data('crsf-token-delete');
                     colHtml += DatatablesJs.makeDeleteButton(deleteUrl, csrfTokenDelete);
                 }
+                colHtml += '<br /><span class="badge badge-pill badge-info">' + Moment(data.updated).format('DD/MM/YYYY HH:mm:ss') + '</span> ';
                 return colHtml;
             },
             className: 'text-right'
