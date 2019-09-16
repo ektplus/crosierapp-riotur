@@ -37,7 +37,7 @@ class VeiculoController extends FormListController
 
     /**
      *
-     * @Route("/veiculo/form/{id}", name="veiculo_form", defaults={"id"=null}, requirements={"id"="\d+"})
+     * @Route("/tur/veiculo/form/{id}", name="veiculo_form", defaults={"id"=null}, requirements={"id"="\d+"})
      * @param Request $request
      * @param Veiculo|null $veiculo
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -58,7 +58,7 @@ class VeiculoController extends FormListController
 
     /**
      *
-     * @Route("/veiculo/list/", name="veiculo_list")
+     * @Route("/tur/veiculo/list/", name="veiculo_list")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
@@ -82,7 +82,7 @@ class VeiculoController extends FormListController
 
     /**
      *
-     * @Route("/veiculo/datatablesJsList/", name="veiculo_datatablesJsList")
+     * @Route("/tur/veiculo/datatablesJsList/", name="veiculo_datatablesJsList")
      * @param Request $request
      * @return Response
      * @throws \CrosierSource\CrosierLibBaseBundle\Exception\ViewException
@@ -96,7 +96,7 @@ class VeiculoController extends FormListController
 
     /**
      *
-     * @Route("/veiculo/delete/{id}/", name="veiculo_delete", requirements={"id"="\d+"})
+     * @Route("/tur/veiculo/delete/{id}/", name="veiculo_delete", requirements={"id"="\d+"})
      * @param Request $request
      * @param Veiculo $veiculo
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

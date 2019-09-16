@@ -138,6 +138,15 @@ class Agencia implements EntityId
     private $foneWhatsapp;
 
     /**
+     *
+     * @ORM\Column(name="obs", type="string", nullable=false)
+     * @Groups("entity")
+     *
+     * @var string|null
+     */
+    private $obs;
+
+    /**
      * @return string|null
      */
     public function getNome(): ?string
@@ -368,6 +377,24 @@ class Agencia implements EntityId
     public function setFoneWhatsapp(?string $foneWhatsapp): Agencia
     {
         $this->foneWhatsapp = $foneWhatsapp;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getObs(): ?string
+    {
+        return $this->obs;
+    }
+
+    /**
+     * @param string|null $obs
+     * @return Agencia
+     */
+    public function setObs(?string $obs): Agencia
+    {
+        $this->obs = $obs;
         return $this;
     }
 

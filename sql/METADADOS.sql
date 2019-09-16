@@ -223,20 +223,8 @@ DROP TABLE IF EXISTS `rtr_tur_viagem_passageiro`;
 
 CREATE TABLE `rtr_tur_viagem_passageiro`
 (
-    `id`                 bigint(20) NOT NULL AUTO_INCREMENT,
-
-    `viagem_id`          BIGINT(20) NOT NULL,
-    `passageiro_id`      BIGINT(20) NOT NULL,
-
-    `inserted`           datetime   NOT NULL,
-    `updated`            datetime   NOT NULL,
-    `version`            int(11),
-    `estabelecimento_id` bigint(20) NOT NULL,
-    `user_inserted_id`   bigint(20) NOT NULL,
-    `user_updated_id`    bigint(20) NOT NULL,
-
-
-    UNIQUE KEY `UK_rtr_tur_viagem_passageiro` (`viagem_id`, `passageiro_id`),
+    `viagem_id`     BIGINT(20) NOT NULL,
+    `passageiro_id` BIGINT(20) NOT NULL,
 
     KEY `K_rtr_tur_viagem_passageiro_viagem` (`viagem_id`),
     CONSTRAINT `FK_rtr_tur_viagem_passageiro_viagem` FOREIGN KEY (`viagem_id`) REFERENCES `rtr_tur_viagem` (`id`),
@@ -244,14 +232,7 @@ CREATE TABLE `rtr_tur_viagem_passageiro`
     KEY `K_rtr_tur_viagem_passageiro_passageiro` (`passageiro_id`),
     CONSTRAINT `FK_rtr_tur_viagem_passageiro_passageiro` FOREIGN KEY (`passageiro_id`) REFERENCES `rtr_tur_passageiro` (`id`),
 
-    PRIMARY KEY (`id`),
-
-    KEY `K_rtr_tur_viagem_passageiro_estabelecimento` (`estabelecimento_id`),
-    KEY `K_rtr_tur_viagem_passageiro_user_inserted` (`user_inserted_id`),
-    KEY `K_rtr_tur_viagem_passageiro_user_updated` (`user_updated_id`),
-    CONSTRAINT `FK_rtr_tur_viagem_passageiro_user_inserted` FOREIGN KEY (`user_inserted_id`) REFERENCES `sec_user` (`id`),
-    CONSTRAINT `FK_rtr_tur_viagem_passageiro_estabelecimento` FOREIGN KEY (`estabelecimento_id`) REFERENCES `cfg_estabelecimento` (`id`),
-    CONSTRAINT `FK_rtr_tur_viagem_passageiro_user_updated` FOREIGN KEY (`user_updated_id`) REFERENCES `sec_user` (`id`)
+    PRIMARY KEY (`viagem_id`, `passageiro_id`)
 
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8
@@ -274,6 +255,7 @@ CREATE TABLE `rtr_tur_passageiro`
     `fone_celular`       varchar(20),
     `fone_whatsapp`      varchar(20),
     `fone_recados`       varchar(20),
+    `email`              varchar(250),
     `obs`                varchar(3000),
 
     `inserted`           datetime     NOT NULL,

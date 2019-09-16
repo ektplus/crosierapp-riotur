@@ -86,6 +86,14 @@ class Itinerario implements EntityId
     private $obs;
 
     /**
+     * Transient.
+     * @Groups("entity")
+     *
+     * @var string|null
+     */
+    private $descricaoMontada;
+
+    /**
      * @return string|null
      */
     public function getOrigemCidade(): ?string
@@ -210,6 +218,27 @@ class Itinerario implements EntityId
         $this->obs = $obs;
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getDescricaoMontada(): ?string
+    {
+        $this->descricaoMontada = 'De ' . $this->getOrigemCidade() . '-' . $this->getOrigemEstado() . ' até ' . $this->getDestinoCidade() . '-' . $this->getDestinoEstado();
+        return $this->descricaoMontada;
+    }
+
+    /**
+     * @param string|null $descricaoMontada
+     * @return Itinerario
+     */
+    public function setDescricaoMontada(?string $descricaoMontada): Itinerario
+    {
+        $this->descricaoMontada = $descricaoMontada;
+        return $this;
+    }
+
+
 
 
 

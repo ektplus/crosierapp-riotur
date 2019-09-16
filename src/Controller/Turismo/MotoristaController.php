@@ -37,7 +37,7 @@ class MotoristaController extends FormListController
 
     /**
      *
-     * @Route("/motorista/form/{id}", name="motorista_form", defaults={"id"=null}, requirements={"id"="\d+"})
+     * @Route("/tur/motorista/form/{id}", name="motorista_form", defaults={"id"=null}, requirements={"id"="\d+"})
      * @param Request $request
      * @param Motorista|null $motorista
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
@@ -58,7 +58,7 @@ class MotoristaController extends FormListController
 
     /**
      *
-     * @Route("/motorista/list/", name="motorista_list")
+     * @Route("/tur/motorista/list/", name="motorista_list")
      * @param Request $request
      * @return Response
      * @throws \Exception
@@ -82,7 +82,7 @@ class MotoristaController extends FormListController
 
     /**
      *
-     * @Route("/motorista/datatablesJsList/", name="motorista_datatablesJsList")
+     * @Route("/tur/motorista/datatablesJsList/", name="motorista_datatablesJsList")
      * @param Request $request
      * @return Response
      * @throws \CrosierSource\CrosierLibBaseBundle\Exception\ViewException
@@ -96,7 +96,7 @@ class MotoristaController extends FormListController
 
     /**
      *
-     * @Route("/motorista/delete/{id}/", name="motorista_delete", requirements={"id"="\d+"})
+     * @Route("/tur/motorista/delete/{id}/", name="motorista_delete", requirements={"id"="\d+"})
      * @param Request $request
      * @param Motorista $motorista
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

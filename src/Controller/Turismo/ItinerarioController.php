@@ -37,7 +37,7 @@ class ItinerarioController extends FormListController
 
     /**
      *
-     * @Route("/itinerario/form/{id}", name="itinerario_form", defaults={"id"=null}, requirements={"id"="\d+"})
+     * @Route("/tur/itinerario/form/{id}", name="itinerario_form", defaults={"id"=null}, requirements={"id"="\d+"})
      * @param Request $request
      * @param Itinerario|null $itinerario
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
@@ -58,7 +58,7 @@ class ItinerarioController extends FormListController
 
     /**
      *
-     * @Route("/itinerario/list/", name="itinerario_list")
+     * @Route("/tur/itinerario/list/", name="itinerario_list")
      * @param Request $request
      * @return Response
      * @throws \Exception
@@ -82,7 +82,7 @@ class ItinerarioController extends FormListController
 
     /**
      *
-     * @Route("/itinerario/datatablesJsList/", name="itinerario_datatablesJsList")
+     * @Route("/tur/itinerario/datatablesJsList/", name="itinerario_datatablesJsList")
      * @param Request $request
      * @return Response
      * @throws \CrosierSource\CrosierLibBaseBundle\Exception\ViewException
@@ -96,7 +96,7 @@ class ItinerarioController extends FormListController
 
     /**
      *
-     * @Route("/itinerario/delete/{id}/", name="itinerario_delete", requirements={"id"="\d+"})
+     * @Route("/tur/itinerario/delete/{id}/", name="itinerario_delete", requirements={"id"="\d+"})
      * @param Request $request
      * @param Itinerario $itinerario
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

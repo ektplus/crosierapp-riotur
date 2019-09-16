@@ -37,7 +37,7 @@ class AgenciaController extends FormListController
 
     /**
      *
-     * @Route("/agencia/form/{id}", name="agencia_form", defaults={"id"=null}, requirements={"id"="\d+"})
+     * @Route("/tur/agencia/form/{id}", name="agencia_form", defaults={"id"=null}, requirements={"id"="\d+"})
      * @param Request $request
      * @param Agencia|null $agencia
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
@@ -58,7 +58,7 @@ class AgenciaController extends FormListController
 
     /**
      *
-     * @Route("/agencia/list/", name="agencia_list")
+     * @Route("/tur/agencia/list/", name="agencia_list")
      * @param Request $request
      * @return Response
      * @throws \Exception
@@ -82,7 +82,7 @@ class AgenciaController extends FormListController
 
     /**
      *
-     * @Route("/agencia/datatablesJsList/", name="agencia_datatablesJsList")
+     * @Route("/tur/agencia/datatablesJsList/", name="agencia_datatablesJsList")
      * @param Request $request
      * @return Response
      * @throws \CrosierSource\CrosierLibBaseBundle\Exception\ViewException
@@ -96,7 +96,7 @@ class AgenciaController extends FormListController
 
     /**
      *
-     * @Route("/agencia/delete/{id}/", name="agencia_delete", requirements={"id"="\d+"})
+     * @Route("/tur/agencia/delete/{id}/", name="agencia_delete", requirements={"id"="\d+"})
      * @param Request $request
      * @param Agencia $agencia
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
