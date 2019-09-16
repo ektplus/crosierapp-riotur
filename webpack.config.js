@@ -30,6 +30,9 @@ Encore
      */
     // .createSharedEntry('bse_layout', './assets/js/bse/layout.js')
     .addEntry('Turismo/veiculoList', './assets/js/Turismo/veiculoList.js')
+    .addEntry('Turismo/motoristaList', './assets/js/Turismo/motoristaList.js')
+    .addEntry('Turismo/agenciaList', './assets/js/Turismo/agenciaList.js')
+    .addEntry('Turismo/itinerarioList', './assets/js/Turismo/itinerarioList.js')
 
 
 

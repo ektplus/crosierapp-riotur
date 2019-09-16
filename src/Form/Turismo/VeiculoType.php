@@ -20,7 +20,8 @@ class VeiculoType extends AbstractType
     {
 
         $builder->add('prefixo', TextType::class, [
-            'label' => 'Prefixo'
+            'label' => 'Prefixo',
+            'attr' => ['class' => 'focusOnReady']
         ]);
 
         $builder->add('apelido', TextType::class, [

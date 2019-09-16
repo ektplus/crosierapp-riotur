@@ -1,5 +1,5 @@
+SET FOREIGN_KEY_CHECKS = 0;
 
-SET FOREIGN_KEY_CHECKS=0;
 
 
 DROP TABLE IF EXISTS `rtr_tur_veiculo`;
@@ -77,7 +77,6 @@ CREATE TABLE `rtr_tur_motorista`
   COLLATE = utf8_swedish_ci;
 
 
-
 DROP TABLE IF EXISTS `rtr_tur_agencia`;
 
 CREATE TABLE `rtr_tur_agencia`
@@ -85,13 +84,15 @@ CREATE TABLE `rtr_tur_agencia`
     `id`                 bigint(20)   NOT NULL AUTO_INCREMENT,
 
     `nome`               varchar(250) NOT NULL,
-    `logradouro`         varchar(250),
-    `numero`             varchar(30),
-    `bairro`             varchar(50),
-    `cidade`             varchar(250),
+    `logradouro`         varchar(200),
+    `numero`             varchar(200),
+    `bairro`             varchar(120),
+    `complemento`        varchar(120),
+    `cidade`             varchar(120),
     `estado`             char(2),
+    `cep`                varchar(9),
     `email`              varchar(250),
-    `perc_comissao`      decimal(5, 2),
+    `perc_comissao`      decimal(12, 5),
     `fone_fixo`          varchar(20),
     `fone_celular`       varchar(20),
     `fone_whatsapp`      varchar(20),

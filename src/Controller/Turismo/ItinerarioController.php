@@ -2,9 +2,9 @@
 
 namespace App\Controller\Turismo;
 
-use App\Entity\Turismo\Veiculo;
-use App\EntityHandler\Turismo\VeiculoEntityHandler;
-use App\Form\Turismo\VeiculoType;
+use App\Entity\Turismo\Itinerario;
+use App\EntityHandler\Turismo\ItinerarioEntityHandler;
+use App\Form\Turismo\ItinerarioType;
 use CrosierSource\CrosierLibBaseBundle\Controller\FormListController;
 use CrosierSource\CrosierLibBaseBundle\Utils\RepositoryUtils\FilterData;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -16,14 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @author Carlos Eduardo Pauluk
  */
-class VeiculoController extends FormListController
+class ItinerarioController extends FormListController
 {
 
     /**
      * @required
-     * @param VeiculoEntityHandler $entityHandler
+     * @param ItinerarioEntityHandler $entityHandler
      */
-    public function setEntityHandler(VeiculoEntityHandler $entityHandler): void
+    public function setEntityHandler(ItinerarioEntityHandler $entityHandler): void
     {
         $this->entityHandler = $entityHandler;
     }
@@ -31,36 +31,36 @@ class VeiculoController extends FormListController
     public function getFilterDatas(array $params): array
     {
         return [
-            new FilterData(['apelido'], 'LIKE', 'apelido', $params)
+            new FilterData(['cidadeOrigem', 'cidadeDestino'], 'LIKE', 'str', $params)
         ];
     }
 
     /**
      *
-     * @Route("/veiculo/form/{id}", name="veiculo_form", defaults={"id"=null}, requirements={"id"="\d+"})
+     * @Route("/itinerario/form/{id}", name="itinerario_form", defaults={"id"=null}, requirements={"id"="\d+"})
      * @param Request $request
-     * @param Veiculo|null $veiculo
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param Itinerario|null $itinerario
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @throws \Exception
      *
      * @IsGranted({"ROLE_TURISMO_ADMIN"}, statusCode=403)
      */
-    public function form(Request $request, Veiculo $veiculo = null)
+    public function form(Request $request, Itinerario $itinerario = null)
     {
         $params = [
-            'typeClass' => VeiculoType::class,
+            'typeClass' => ItinerarioType::class,
             'formView' => '@CrosierLibBase/form.html.twig',
-            'formRoute' => 'veiculo_form',
-            'formPageTitle' => 'Veículo'
+            'formRoute' => 'itinerario_form',
+            'formPageTitle' => 'Itinerário'
         ];
-        return $this->doForm($request, $veiculo, $params);
+        return $this->doForm($request, $itinerario, $params);
     }
 
     /**
      *
-     * @Route("/veiculo/list/", name="veiculo_list")
+     * @Route("/itinerario/list/", name="itinerario_list")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @throws \Exception
      *
      * @IsGranted({"ROLE_TURISMO_ADMIN"}, statusCode=403)
@@ -68,21 +68,21 @@ class VeiculoController extends FormListController
     public function list(Request $request): Response
     {
         $params = [
-            'formRoute' => 'veiculo_form',
+            'formRoute' => 'itinerario_form',
             'listView' => '@CrosierLibBase/list.html.twig',
-            'listJS' => 'Turismo/veiculoList.js',
-            'listRoute' => 'veiculo_list',
-            'listRouteAjax' => 'veiculo_datatablesJsList',
-            'listPageTitle' => 'Veículos',
-            'deleteRoute' => 'veiculo_delete',
-            'listId' => 'veiculoList'
+            'listJS' => 'Turismo/itinerarioList.js',
+            'listRoute' => 'itinerario_list',
+            'listRouteAjax' => 'itinerario_datatablesJsList',
+            'listPageTitle' => 'Itinerários',
+            'deleteRoute' => 'itinerario_delete',
+            'listId' => 'itinerarioList'
         ];
         return $this->doList($request, $params);
     }
 
     /**
      *
-     * @Route("/veiculo/datatablesJsList/", name="veiculo_datatablesJsList")
+     * @Route("/itinerario/datatablesJsList/", name="itinerario_datatablesJsList")
      * @param Request $request
      * @return Response
      * @throws \CrosierSource\CrosierLibBaseBundle\Exception\ViewException
@@ -96,16 +96,16 @@ class VeiculoController extends FormListController
 
     /**
      *
-     * @Route("/veiculo/delete/{id}/", name="veiculo_delete", requirements={"id"="\d+"})
+     * @Route("/itinerario/delete/{id}/", name="itinerario_delete", requirements={"id"="\d+"})
      * @param Request $request
-     * @param Veiculo $veiculo
+     * @param Itinerario $itinerario
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @IsGranted({"ROLE_TURISMO_ADMIN"}, statusCode=403)
      */
-    public function delete(Request $request, Veiculo $veiculo): \Symfony\Component\HttpFoundation\RedirectResponse
+    public function delete(Request $request, Itinerario $itinerario): \Symfony\Component\HttpFoundation\RedirectResponse
     {
-        return $this->doDelete($request, $veiculo);
+        return $this->doDelete($request, $itinerario);
     }
 
 

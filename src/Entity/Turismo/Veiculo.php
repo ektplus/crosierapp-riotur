@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * Entidade 'Carteira'.
  *
  * @ORM\Entity(repositoryClass="App\Repository\Turismo\VeiculoRepository")
  * @ORM\Table(name="rtr_tur_veiculo")
