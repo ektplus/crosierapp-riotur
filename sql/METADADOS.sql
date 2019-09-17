@@ -218,33 +218,14 @@ CREATE TABLE `rtr_tur_viagem`
   COLLATE = utf8_swedish_ci;
 
 
-
-DROP TABLE IF EXISTS `rtr_tur_viagem_passageiro`;
-
-CREATE TABLE `rtr_tur_viagem_passageiro`
-(
-    `viagem_id`     BIGINT(20) NOT NULL,
-    `passageiro_id` BIGINT(20) NOT NULL,
-
-    KEY `K_rtr_tur_viagem_passageiro_viagem` (`viagem_id`),
-    CONSTRAINT `FK_rtr_tur_viagem_passageiro_viagem` FOREIGN KEY (`viagem_id`) REFERENCES `rtr_tur_viagem` (`id`),
-
-    KEY `K_rtr_tur_viagem_passageiro_passageiro` (`passageiro_id`),
-    CONSTRAINT `FK_rtr_tur_viagem_passageiro_passageiro` FOREIGN KEY (`passageiro_id`) REFERENCES `rtr_tur_passageiro` (`id`),
-
-    PRIMARY KEY (`viagem_id`, `passageiro_id`)
-
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8
-  COLLATE = utf8_swedish_ci;
-
-
-
+--
 DROP TABLE IF EXISTS `rtr_tur_passageiro`;
 
 CREATE TABLE `rtr_tur_passageiro`
 (
     `id`                 bigint(20)   NOT NULL AUTO_INCREMENT,
+
+    `viagem_id`          BIGINT(20)   NOT NULL,
 
     `cpf`                varchar(11),
     `rg`                 varchar(20),
@@ -265,8 +246,12 @@ CREATE TABLE `rtr_tur_passageiro`
     `user_inserted_id`   bigint(20)   NOT NULL,
     `user_updated_id`    bigint(20)   NOT NULL,
 
+    UNIQUE KEY UK_rtr_tur_viagem_passageiro (`viagem_id`, `cpf`, `rg`),
+
     PRIMARY KEY (`id`),
-    UNIQUE KEY `UK_rtr_tur_passageiro_cpf` (`cpf`),
+
+    KEY `K_rtr_tur_viagem_passageiro_viagem` (`viagem_id`),
+    CONSTRAINT `FK_rtr_tur_viagem_passageiro_viagem` FOREIGN KEY (`viagem_id`) REFERENCES `rtr_tur_viagem` (`id`),
 
     KEY `K_rtr_tur_passageiro_estabelecimento` (`estabelecimento_id`),
     KEY `K_rtr_tur_passageiro_user_inserted` (`user_inserted_id`),

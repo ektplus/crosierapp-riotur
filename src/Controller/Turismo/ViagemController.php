@@ -157,7 +157,7 @@ class ViagemController extends FormListController
             if ($form->isValid()) {
                 try {
                     $entity = $form->getData();
-                    $this->passageiroEntityHandler->save($entity);
+                    $entity = $this->passageiroEntityHandler->save($entity);
                     if (!$viagem->getPassageiros()->contains($entity)) {
                         $viagem->getPassageiros()->add($entity);
                         $this->entityHandler->save($viagem);
