@@ -246,12 +246,12 @@ CREATE TABLE `rtr_tur_passageiro`
     `user_inserted_id`   bigint(20)   NOT NULL,
     `user_updated_id`    bigint(20)   NOT NULL,
 
-    UNIQUE KEY UK_rtr_tur_viagem_passageiro (`viagem_id`, `cpf`, `rg`),
+    UNIQUE KEY UK_rtr_tur_passageiro (`viagem_id`, `cpf`, `rg`),
 
     PRIMARY KEY (`id`),
 
-    KEY `K_rtr_tur_viagem_passageiro_viagem` (`viagem_id`),
-    CONSTRAINT `FK_rtr_tur_viagem_passageiro_viagem` FOREIGN KEY (`viagem_id`) REFERENCES `rtr_tur_viagem` (`id`),
+    KEY `K_rtr_tur_passageiro_viagem` (`viagem_id`),
+    CONSTRAINT `FK_rtr_tur_passageiro_viagem` FOREIGN KEY (`viagem_id`) REFERENCES `rtr_tur_viagem` (`id`),
 
     KEY `K_rtr_tur_passageiro_estabelecimento` (`estabelecimento_id`),
     KEY `K_rtr_tur_passageiro_user_inserted` (`user_inserted_id`),

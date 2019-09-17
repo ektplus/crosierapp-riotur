@@ -127,8 +127,13 @@ class PassageiroController extends FormListController
         $tipoDoc = $request->get('tipoDoc') ?? '';
         /** @var PassageiroRepository $repoPassageiro */
         $repoPassageiro = $this->getDoctrine()->getRepository(Passageiro::class);
-        $r = $repoPassageiro->findBy([$tipoDoc => $v]);
-        return $r ? new JsonResponse(['results' => $entityIdUtils->serializeAll($r)]) : new JsonResponse(null);
+        $r = $repoPassageiro->findOneBy([$tipoDoc => $v], ['inserted' => 'DESC']);
+        if ($r) {
+            return new JsonResponse(['result' => $entityIdUtils->serialize($r)]);
+        }
+
+
+        return  new JsonResponse(null);
     }
 
 

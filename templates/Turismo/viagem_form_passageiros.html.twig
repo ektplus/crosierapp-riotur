@@ -45,7 +45,7 @@
                                         </button>
 
                                         <button type="button" class="btn btn-sm btn-danger"
-                                                data-url="{{ url('viagem_passageiro_delete', {'viagem': e.id, 'passageiro': passageiro.id}) }}"
+                                                data-url="{{ url('viagem_passageiro_delete', {'passageiro': passageiro.id}) }}"
                                                 data-token="{{ csrf_token('delete') }}"
                                                 data-target="#confirmationModal" data-toggle="modal">
                                             <i class="fa fa-trash" aria-hidden="true"></i>

@@ -7,6 +7,7 @@ use CrosierSource\CrosierLibBaseBundle\Entity\EntityIdTrait;
 use CrosierSource\CrosierLibBaseBundle\Utils\StringUtils\StringUtils;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  *
@@ -19,6 +20,18 @@ class Passageiro implements EntityId
 {
 
     use EntityIdTrait;
+
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Turismo\Viagem", inversedBy="passageiros")
+     * @ORM\JoinColumn(name="viagem_id", nullable=true)
+     * @Groups("entity")
+     * @MaxDepth(1)
+     *
+     * @var Viagem|null
+     */
+    private $viagem;
 
 
     /**
@@ -112,12 +125,29 @@ class Passageiro implements EntityId
     private $obs;
 
     /**
+     * @return Viagem|null
+     */
+    public function getViagem(): ?Viagem
+    {
+        return $this->viagem;
+    }
+
+    /**
+     * @param Viagem|null $viagem
+     * @return Passageiro
+     */
+    public function setViagem(?Viagem $viagem): Passageiro
+    {
+        $this->viagem = $viagem;
+        return $this;
+    }
+
+    /**
      * @return string|null
      */
     public function getCpf(): ?string
     {
-        $this->cpf = StringUtils::mascararCnpjCpf($this->cpf);
-        return $this->cpf;
+        return StringUtils::mascararCnpjCpf($this->cpf);
     }
 
     /**

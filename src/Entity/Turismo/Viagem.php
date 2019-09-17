@@ -136,11 +136,10 @@ class Viagem implements EntityId
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="Passageiro",cascade={"all"})
-     * @ORM\JoinTable(name="rtr_tur_viagem_passageiro",
-     *      joinColumns={@ORM\JoinColumn(name="viagem_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="passageiro_id", referencedColumnName="id")}
-     * )
+     * @ORM\OneToMany(
+     *      targetEntity="Passageiro",
+     *      mappedBy="viagem",
+     *      orphanRemoval=true)
      * @var null|Passageiro[]|array|Collection
      * @Groups("entity")
      */

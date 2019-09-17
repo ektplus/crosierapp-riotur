@@ -13,6 +13,7 @@ use CrosierSource\CrosierLibBaseBundle\Exception\ViewException;
 use CrosierSource\CrosierLibBaseBundle\Utils\ExceptionUtils\ExceptionUtils;
 use CrosierSource\CrosierLibBaseBundle\Utils\RepositoryUtils\FilterData;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -103,7 +104,7 @@ class ViagemController extends FormListController
      * @Route("/tur/viagem/datatablesJsList/", name="viagem_datatablesJsList")
      * @param Request $request
      * @return Response
-     * @throws \CrosierSource\CrosierLibBaseBundle\Exception\ViewException
+     * @throws ViewException
      *
      * @IsGranted({"ROLE_TURISMO_ADMIN"}, statusCode=403)
      */
@@ -130,17 +131,20 @@ class ViagemController extends FormListController
     /**
      *
      * @Route("/tur/viagem/passageiro/form/{viagem}/{passageiro}", name="viagem_passageiro_form", defaults={"passageiro"=null}, requirements={"viagem"="\d+","passageiro"="\d+"})
+     *
+     * @ParamConverter("viagem", class="App\Entity\Turismo\Viagem", options={"id" = "viagem"})
+     * @ParamConverter("passageiro", class="App\Entity\Turismo\Passageiro", options={"id" = "passageiro"})
      * @param Request $request
      * @param Viagem|null $viagem
+     * @param Passageiro|null $passageiro
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @throws \Exception
-     *
      * @IsGranted({"ROLE_TURISMO_ADMIN"}, statusCode=403)
      */
-    public function passageiroForm(Request $request, Viagem $viagem, Passageiro $passageiro = null)
+    public function passageiroForm(Request $request, Viagem $viagem, ?Passageiro $passageiro = null)
     {
         $params = [
-            'formView' => '@CrosierLibBase/form.html.twig',
+            'formView' => 'Turismo/viagem_formPassageiro.html.twig',
             'formJS' => 'Turismo/viagemPassageiroForm.js',
             'formRoute' => 'viagem_passageiro_form',
             'formRouteParams' => ['viagem' => $viagem->getId()],
@@ -156,12 +160,10 @@ class ViagemController extends FormListController
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 try {
-                    $entity = $form->getData();
-                    $entity = $this->passageiroEntityHandler->save($entity);
-                    if (!$viagem->getPassageiros()->contains($entity)) {
-                        $viagem->getPassageiros()->add($entity);
-                        $this->entityHandler->save($viagem);
-                    }
+                    /** @var Passageiro $passageiro */
+                    $passageiro = $form->getData();
+                    $passageiro->setViagem($viagem);
+                    $passageiro = $this->passageiroEntityHandler->save($passageiro);
                     $this->addFlash('success', 'Registro salvo com sucesso!');
                     return $this->redirectToRoute('viagem_form', ['id' => $viagem->getId(), '_fragment' => 'passageiros']);
                 } catch (ViewException $e) {
@@ -190,18 +192,20 @@ class ViagemController extends FormListController
 
     /**
      *
-     * @Route("/tur/viagem/passageiro/delete/{viagem}/{passageiro}", name="viagem_passageiro_delete", requirements={"viagem"="\d+","passageiro"="\d+"})
+     * @Route("/tur/viagem/passageiro/delete/{passageiro}", name="viagem_passageiro_delete", requirements={"passageiro"="\d+"})
+     *
+     * @ParamConverter("passageiro", class="App\Entity\Turismo\Passageiro", options={"id" = "passageiro"})
+     *
      * @param Request $request
-     * @param Viagem $viagem
+     * @param Passageiro $passageiro
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @IsGranted({"ROLE_TURISMO_ADMIN"}, statusCode=403)
      */
-    public function passageiroDelete(Request $request, Viagem $viagem, Passageiro $passageiro): \Symfony\Component\HttpFoundation\RedirectResponse
+    public function passageiroDelete(Request $request, Passageiro $passageiro): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         try {
-            $viagem->getPassageiros()->removeElement($passageiro);
-            $this->entityHandler->save($viagem);
+            $this->passageiroEntityHandler->delete($passageiro);
             $this->addFlash('success', 'Passageiro removido com sucesso!');
         } catch (ViewException $e) {
             $this->addFlash('error', $e->getMessage());
