@@ -36,6 +36,14 @@ function getDatatablesColumns() {
             }
         },
         {
+            name: 'e.veiculo',
+            data: 'e',
+            title: 'Veículo',
+            render: function (data, type, row) {
+                return data.veiculo.apelido;
+            }
+        },
+        {
             name: 'e.precoMin',
             data: 'e.precoMin',
             title: 'Preço Mín',

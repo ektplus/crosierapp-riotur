@@ -4,6 +4,8 @@ namespace App\Form\Turismo;
 
 use App\Entity\Turismo\Veiculo;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -39,10 +41,50 @@ class VeiculoType extends AbstractType
             'required' => false,
         ]);
 
-        $builder->add('Renavan', TextType::class, [
+        $builder->add('renavan', TextType::class, [
             'label' => 'Renavan',
             'required' => false,
         ]);
+
+        $builder->add('dtVenctoDer', DateType::class, array(
+            'label' => 'Dt Vencto DER',
+            'widget' => 'single_text',
+            'required' => true,
+            'format' => 'dd/MM/yyyy',
+            'attr' => [
+                'class' => 'crsr-date'
+            ]
+        ));
+
+        $builder->add('dtVenctoAntt', DateType::class, array(
+            'label' => 'Dt Vencto ANTT',
+            'widget' => 'single_text',
+            'required' => true,
+            'format' => 'dd/MM/yyyy',
+            'attr' => [
+                'class' => 'crsr-date'
+            ]
+        ));
+
+        $builder->add('dtVenctoTacografo', DateType::class, array(
+            'label' => 'Dt Vencto Tacógrafo',
+            'widget' => 'single_text',
+            'required' => true,
+            'format' => 'dd/MM/yyyy',
+            'attr' => [
+                'class' => 'crsr-date'
+            ]
+        ));
+
+        $builder->add('dtVenctoSeguro', DateType::class, array(
+            'label' => 'Dt Vencto Seguro',
+            'widget' => 'single_text',
+            'required' => true,
+            'format' => 'dd/MM/yyyy',
+            'attr' => [
+                'class' => 'crsr-date'
+            ]
+        ));
 
         $builder->add('Obs', TextareaType::class, [
             'label' => 'Obs',

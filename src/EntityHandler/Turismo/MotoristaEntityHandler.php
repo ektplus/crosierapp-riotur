@@ -11,9 +11,15 @@ use CrosierSource\CrosierLibBaseBundle\EntityHandler\EntityHandler;
 class MotoristaEntityHandler extends EntityHandler
 {
 
-
     public function getEntityClass()
     {
         return Motorista::class;
     }
+
+    public function beforeSave(/** @var Motorista $motorista */ $motorista)
+    {
+        $motorista->setCpf(preg_replace("/[^0-9]/", "", $motorista->getCpf()));
+    }
+
+
 }

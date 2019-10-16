@@ -5,12 +5,10 @@ namespace App\Form\Turismo;
 use App\Entity\Turismo\Agencia;
 use App\Entity\Turismo\Itinerario;
 use App\Entity\Turismo\Motorista;
-use App\Entity\Turismo\Veiculo;
 use App\Entity\Turismo\Viagem;
 use App\Repository\Turismo\AgenciaRepository;
 use App\Repository\Turismo\ItinerarioRepository;
 use App\Repository\Turismo\MotoristaRepository;
-use App\Repository\Turismo\VeiculoRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Form\AbstractType;
@@ -71,21 +69,6 @@ class ViagemType extends AbstractType
             'attr' => [
                 'class' => 'crsr-datetime'
             ]
-        ]);
-
-        /** @var VeiculoRepository $repoVeiculo */
-        $repoVeiculo = $this->doctrine->getRepository(Veiculo::class);
-        $builder->add('veiculo', EntityType::class, [
-            'label' => 'Veículo',
-            'class' => Veiculo::class,
-            'choice_label' => function (?Veiculo $veiculo) {
-                return $veiculo ? $veiculo->getApelido() : null;
-            },
-            'choices' => $repoVeiculo->findAll(['apelido' => 'ASC']),
-            'attr' => [
-                'class' => 'autoSelect2'
-            ],
-            'required' => false
         ]);
 
         /** @var ItinerarioRepository $repoItinerario */

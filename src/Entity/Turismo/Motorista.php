@@ -59,6 +59,33 @@ class Motorista implements EntityId
 
     /**
      *
+     * @ORM\Column(name="dt_vencto_cnh", type="date", nullable=false)
+     * @Groups("entityId")
+     *
+     * @var null|\DateTime
+     */
+    private $dtVenctoCnh;
+
+    /**
+     *
+     * @ORM\Column(name="dt_vencto_cart_saude", type="date", nullable=false)
+     * @Groups("entityId")
+     *
+     * @var null|\DateTime
+     */
+    private $dtVenctoCarteiraSaude;
+
+    /**
+     *
+     * @ORM\Column(name="dt_validade_curso_transp_passag", type="date", nullable=false)
+     * @Groups("entityId")
+     *
+     * @var null|\DateTime
+     */
+    private $dtValidadeCursoTranspPassag;
+
+    /**
+     *
      * @ORM\Column(name="fone_fixo", type="string", nullable=false)
      * @Groups("entity")
      *
@@ -173,6 +200,60 @@ class Motorista implements EntityId
     public function setCnh(?string $cnh): Motorista
     {
         $this->cnh = $cnh;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDtVenctoCnh(): ?\DateTime
+    {
+        return $this->dtVenctoCnh;
+    }
+
+    /**
+     * @param \DateTime|null $dtVenctoCnh
+     * @return Motorista
+     */
+    public function setDtVenctoCnh(?\DateTime $dtVenctoCnh): Motorista
+    {
+        $this->dtVenctoCnh = $dtVenctoCnh;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDtVenctoCarteiraSaude(): ?\DateTime
+    {
+        return $this->dtVenctoCarteiraSaude;
+    }
+
+    /**
+     * @param \DateTime|null $dtVenctoCarteiraSaude
+     * @return Motorista
+     */
+    public function setDtVenctoCarteiraSaude(?\DateTime $dtVenctoCarteiraSaude): Motorista
+    {
+        $this->dtVenctoCarteiraSaude = $dtVenctoCarteiraSaude;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDtValidadeCursoTranspPassag(): ?\DateTime
+    {
+        return $this->dtValidadeCursoTranspPassag;
+    }
+
+    /**
+     * @param \DateTime|null $dtValidadeCursoTranspPassag
+     * @return Motorista
+     */
+    public function setDtValidadeCursoTranspPassag(?\DateTime $dtValidadeCursoTranspPassag): Motorista
+    {
+        $this->dtValidadeCursoTranspPassag = $dtValidadeCursoTranspPassag;
         return $this;
     }
 

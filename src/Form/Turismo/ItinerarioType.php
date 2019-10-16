@@ -3,10 +3,13 @@
 namespace App\Form\Turismo;
 
 use App\Entity\Turismo\Itinerario;
+use App\Entity\Turismo\Veiculo;
+use App\Repository\Turismo\VeiculoRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,6 +21,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ItinerarioType extends AbstractType
 {
+
+    /** @var RegistryInterface */
+    private $doctrine;
+
+    /**
+     * @required
+     * @param RegistryInterface $doctrine
+     */
+    public function setDoctrine(RegistryInterface $doctrine): void
+    {
+        $this->doctrine = $doctrine;
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -104,6 +119,20 @@ class ItinerarioType extends AbstractType
             'attr' => ['class' => 'autoSelect2']
         ]);
 
+        /** @var VeiculoRepository $repoVeiculo */
+        $repoVeiculo = $this->doctrine->getRepository(Veiculo::class);
+        $builder->add('veiculo', EntityType::class, [
+            'label' => 'Veículo',
+            'class' => Veiculo::class,
+            'choice_label' => function (?Veiculo $veiculo) {
+                return $veiculo ? $veiculo->getApelido() : null;
+            },
+            'choices' => $repoVeiculo->findAll(['apelido' => 'ASC']),
+            'attr' => [
+                'class' => 'autoSelect2'
+            ],
+            'required' => false
+        ]);
 
         $builder->add('precoMin', MoneyType::class, [
             'label' => 'Preço (Mín)',

@@ -4,6 +4,7 @@ namespace App\Form\Turismo;
 
 use App\Entity\Turismo\Motorista;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,6 +36,36 @@ class MotoristaType extends AbstractType
         $builder->add('cnh', TextType::class, [
             'label' => 'CNH',
         ]);
+
+        $builder->add('dtVenctoCnh', DateType::class, array(
+            'label' => 'Dt Vencto CNH',
+            'widget' => 'single_text',
+            'required' => true,
+            'format' => 'dd/MM/yyyy',
+            'attr' => [
+                'class' => 'crsr-date'
+            ]
+        ));
+
+        $builder->add('dtVenctoCarteiraSaude', DateType::class, array(
+            'label' => 'Dt Vencto Carteira Saúde',
+            'widget' => 'single_text',
+            'required' => true,
+            'format' => 'dd/MM/yyyy',
+            'attr' => [
+                'class' => 'crsr-date'
+            ]
+        ));
+
+        $builder->add('dtValidadeCursoTranspPassag', DateType::class, array(
+            'label' => 'Dt Vencto Curso Transporte de Passageiros',
+            'widget' => 'single_text',
+            'required' => true,
+            'format' => 'dd/MM/yyyy',
+            'attr' => [
+                'class' => 'crsr-date'
+            ]
+        ));
 
         $builder->add('foneFixo', TextType::class, [
             'label' => 'Fone (Fixo)',

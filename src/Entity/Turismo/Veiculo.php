@@ -67,6 +67,42 @@ class Veiculo implements EntityId
 
     /**
      *
+     * @ORM\Column(name="dt_vencto_der", type="date", nullable=false)
+     * @Groups("entityId")
+     *
+     * @var null|\DateTime
+     */
+    private $dtVenctoDer;
+
+    /**
+     *
+     * @ORM\Column(name="dt_vencto_antt", type="date", nullable=false)
+     * @Groups("entityId")
+     *
+     * @var null|\DateTime
+     */
+    private $dtVenctoAntt;
+
+    /**
+     *
+     * @ORM\Column(name="dt_vencto_tacografo", type="date", nullable=false)
+     * @Groups("entityId")
+     *
+     * @var null|\DateTime
+     */
+    private $dtVenctoTacografo;
+
+    /**
+     *
+     * @ORM\Column(name="dt_vencto_seguro", type="date", nullable=false)
+     * @Groups("entityId")
+     *
+     * @var null|\DateTime
+     */
+    private $dtVenctoSeguro;
+
+    /**
+     *
      * @ORM\Column(name="obs", type="string", nullable=false)
      * @Groups("entity")
      *
@@ -161,6 +197,78 @@ class Veiculo implements EntityId
     public function setRenavan(?string $renavan): Veiculo
     {
         $this->renavan = $renavan;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDtVenctoDer(): ?\DateTime
+    {
+        return $this->dtVenctoDer;
+    }
+
+    /**
+     * @param \DateTime|null $dtVenctoDer
+     * @return Veiculo
+     */
+    public function setDtVenctoDer(?\DateTime $dtVenctoDer): Veiculo
+    {
+        $this->dtVenctoDer = $dtVenctoDer;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDtVenctoAntt(): ?\DateTime
+    {
+        return $this->dtVenctoAntt;
+    }
+
+    /**
+     * @param \DateTime|null $dtVenctoAntt
+     * @return Veiculo
+     */
+    public function setDtVenctoAntt(?\DateTime $dtVenctoAntt): Veiculo
+    {
+        $this->dtVenctoAntt = $dtVenctoAntt;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDtVenctoTacografo(): ?\DateTime
+    {
+        return $this->dtVenctoTacografo;
+    }
+
+    /**
+     * @param \DateTime|null $dtVenctoTacografo
+     * @return Veiculo
+     */
+    public function setDtVenctoTacografo(?\DateTime $dtVenctoTacografo): Veiculo
+    {
+        $this->dtVenctoTacografo = $dtVenctoTacografo;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDtVenctoSeguro(): ?\DateTime
+    {
+        return $this->dtVenctoSeguro;
+    }
+
+    /**
+     * @param \DateTime|null $dtVenctoSeguro
+     * @return Veiculo
+     */
+    public function setDtVenctoSeguro(?\DateTime $dtVenctoSeguro): Veiculo
+    {
+        $this->dtVenctoSeguro = $dtVenctoSeguro;
         return $this;
     }
 

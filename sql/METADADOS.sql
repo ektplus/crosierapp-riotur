@@ -6,21 +6,27 @@ DROP TABLE IF EXISTS `rtr_tur_veiculo`;
 
 CREATE TABLE `rtr_tur_veiculo`
 (
-    `id`                 bigint(20)  NOT NULL AUTO_INCREMENT,
+    `id`                  bigint(20)  NOT NULL AUTO_INCREMENT,
 
-    `prefixo`            varchar(50) NOT NULL,
-    `apelido`            varchar(100),
-    `placa`              varchar(15) NOT NULL,
-    `status`             varchar(50) NOT NULL,
-    `renavan`            varchar(50) NOT NULL,
-    `obs`                varchar(3000),
+    `prefixo`             varchar(50) NOT NULL,
+    `apelido`             varchar(100),
+    `placa`               varchar(15) NOT NULL,
+    `status`              varchar(50) NOT NULL,
+    `renavan`             varchar(50) NOT NULL,
+    `dt_vencto_der`       date        NOT NULL,
+    `dt_vencto_antt`      date        NOT NULL,
+    `dt_vencto_tacografo` date        NOT NULL,
+    `dt_vencto_seguro`    date        NOT NULL,
 
-    `inserted`           datetime    NOT NULL,
-    `updated`            datetime    NOT NULL,
-    `version`            int(11),
-    `estabelecimento_id` bigint(20)  NOT NULL,
-    `user_inserted_id`   bigint(20)  NOT NULL,
-    `user_updated_id`    bigint(20)  NOT NULL,
+    `obs`                 varchar(3000),
+
+
+    `inserted`            datetime    NOT NULL,
+    `updated`             datetime    NOT NULL,
+    `version`             int(11),
+    `estabelecimento_id`  bigint(20)  NOT NULL,
+    `user_inserted_id`    bigint(20)  NOT NULL,
+    `user_updated_id`     bigint(20)  NOT NULL,
 
     PRIMARY KEY (`id`),
     UNIQUE KEY `UK_rtr_tur_veiculo_codigo` (`placa`),
@@ -43,24 +49,27 @@ DROP TABLE IF EXISTS `rtr_tur_motorista`;
 
 CREATE TABLE `rtr_tur_motorista`
 (
-    `id`                 bigint(20)   NOT NULL AUTO_INCREMENT,
+    `id`                              bigint(20)   NOT NULL AUTO_INCREMENT,
 
-    `cpf`                varchar(11)  NOT NULL,
-    `rg`                 varchar(20),
-    `nome`               varchar(250) NOT NULL,
-    `cnh`                varchar(11)  NOT NULL,
-    `fone_fixo`          varchar(20),
-    `fone_celular`       varchar(20),
-    `fone_whatsapp`      varchar(20),
-    `fone_recados`       varchar(20),
-    `obs`                varchar(3000),
+    `cpf`                             varchar(11)  NOT NULL,
+    `rg`                              varchar(20),
+    `nome`                            varchar(250) NOT NULL,
+    `cnh`                             varchar(11)  NOT NULL,
+    `dt_vencto_cnh`                   date         NOT NULL,
+    `dt_vencto_cart_saude`            date         NOT NULL,
+    `dt_validade_curso_transp_passag` date         NOT NULL,
+    `fone_fixo`                       varchar(20),
+    `fone_celular`                    varchar(20),
+    `fone_whatsapp`                   varchar(20),
+    `fone_recados`                    varchar(20),
+    `obs`                             varchar(3000),
 
-    `inserted`           datetime     NOT NULL,
-    `updated`            datetime     NOT NULL,
-    `version`            int(11),
-    `estabelecimento_id` bigint(20)   NOT NULL,
-    `user_inserted_id`   bigint(20)   NOT NULL,
-    `user_updated_id`    bigint(20)   NOT NULL,
+    `inserted`                        datetime     NOT NULL,
+    `updated`                         datetime     NOT NULL,
+    `version`                         int(11),
+    `estabelecimento_id`              bigint(20)   NOT NULL,
+    `user_inserted_id`                bigint(20)   NOT NULL,
+    `user_updated_id`                 bigint(20)   NOT NULL,
 
     PRIMARY KEY (`id`),
     UNIQUE KEY `UK_rtr_tur_motorista_cpf` (`cpf`),
@@ -133,6 +142,8 @@ CREATE TABLE `rtr_tur_itinerario`
     `cidade_destino`     varchar(250) NOT NULL,
     `estado_destino`     char(2)      NOT NULL,
 
+    `veiculo_id`         bigint(20) NOT NULL,
+
     `preco_min`          decimal(15, 2),
     `preco_max`          decimal(15, 2),
     `obs`                varchar(3000),
@@ -143,6 +154,10 @@ CREATE TABLE `rtr_tur_itinerario`
     `estabelecimento_id` bigint(20)   NOT NULL,
     `user_inserted_id`   bigint(20)   NOT NULL,
     `user_updated_id`    bigint(20)   NOT NULL,
+
+
+    KEY `K_rtr_tur_itinerario_veiculo` (`veiculo_id`),
+    CONSTRAINT `FK_rtr_tur_itinerario_veiculo` FOREIGN KEY (`veiculo_id`) REFERENCES `rtr_tur_veiculo` (`id`),
 
     PRIMARY KEY (`id`),
 
@@ -170,8 +185,7 @@ CREATE TABLE `rtr_tur_viagem`
     `dthr_saida`         datetime,
     `dthr_retorno`       datetime,
 
-
-    `veiculo_id`         BIGINT(20),
+    `veiculo_id`         BIGINT(20), -- deve ser o mesmo do itinerário
     `agencia_id`         BIGINT(20),
     `motorista_id`       BIGINT(20),
     `itinerario_id`      BIGINT(20)  NOT NULL,

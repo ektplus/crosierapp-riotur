@@ -4,7 +4,6 @@ namespace App\Entity\Turismo;
 
 use CrosierSource\CrosierLibBaseBundle\Entity\EntityId;
 use CrosierSource\CrosierLibBaseBundle\Entity\EntityIdTrait;
-use CrosierSource\CrosierLibBaseBundle\Utils\StringUtils\StringUtils;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -57,6 +56,15 @@ class Itinerario implements EntityId
      */
     private $destinoEstado;
 
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Turismo\Veiculo")
+     * @ORM\JoinColumn(name="veiculo_id", nullable=true)
+     * @Groups("entity")
+     *
+     * @var Veiculo|null
+     */
+    private $veiculo;
 
     /**
      *
@@ -166,6 +174,24 @@ class Itinerario implements EntityId
     }
 
     /**
+     * @return Veiculo|null
+     */
+    public function getVeiculo(): ?Veiculo
+    {
+        return $this->veiculo;
+    }
+
+    /**
+     * @param Veiculo|null $veiculo
+     * @return Itinerario
+     */
+    public function setVeiculo(?Veiculo $veiculo): Itinerario
+    {
+        $this->veiculo = $veiculo;
+        return $this;
+    }
+
+    /**
      * @return float|null
      */
     public function getPrecoMin(): ?float
@@ -224,7 +250,7 @@ class Itinerario implements EntityId
      */
     public function getDescricaoMontada(): ?string
     {
-        $this->descricaoMontada = 'De ' . $this->getOrigemCidade() . '-' . $this->getOrigemEstado() . ' até ' . $this->getDestinoCidade() . '-' . $this->getDestinoEstado();
+        $this->descricaoMontada = 'De ' . $this->getOrigemCidade() . '-' . $this->getOrigemEstado() . ' até ' . $this->getDestinoCidade() . '-' . $this->getDestinoEstado() . ' (' . $this->getVeiculo()->getApelido() . ')';
         return $this->descricaoMontada;
     }
 
@@ -237,9 +263,6 @@ class Itinerario implements EntityId
         $this->descricaoMontada = $descricaoMontada;
         return $this;
     }
-
-
-
 
 
 }
