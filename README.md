@@ -1,2 +1,5 @@
-# crosierapp-riotur
-CrosierApp para o projeto Riotur
+editando completamente
+sem possibilidade de merge
+1
+2
+3
